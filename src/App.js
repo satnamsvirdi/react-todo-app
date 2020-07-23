@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import AppTitle from './components/AppTitle';
+import TaskInput from './components/TaskInput';
+import TaskList from './components/TaskList';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: []
+    }
+  }; 
+
+  addTodo(value) {
+    console.warn(value);
+    this.setState({
+      data: [...this.state.data, value]
+    });
+  }
+
+  render() {
+    return (
+      <>
+        <AppTitle />
+        <TaskInput addTodo={this.addTodo.bind(this)} />
+        <TaskList data={this.state.data}/>
+      </>
+    );
+  };
+}; 
 
 export default App;
