@@ -12,19 +12,38 @@ class App extends React.Component {
     }
   }; 
 
-  addTodo(value) {
-    console.warn(value);
+  addTodo = (obj) => {
     this.setState({
-      data: [...this.state.data, value]
+      data: [...this.state.data, obj]
     });
   }
+
+  handleChange = (index) => { 
+    let newTodos = [...this.state.data];
+    newTodos[index].isChecked = !newTodos[index].isChecked ? true : false;
+    this.setState({
+      data: newTodos
+    })
+  };
+
+  handleClick = (index) => {
+    let newTodos = [...this.state.data];
+    newTodos.splice(index,1);
+    this.setState({
+      data: newTodos
+    })
+  };
 
   render() {
     return (
       <>
         <AppTitle />
-        <TaskInput addTodo={this.addTodo.bind(this)} />
-        <TaskList data={this.state.data}/>
+        <TaskInput addTodo={this.addTodo} />
+        <TaskList 
+          data={this.state.data}
+          handleChange={this.handleChange}
+          handleClick={this.handleClick}
+        />
       </>
     );
   };

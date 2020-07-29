@@ -5,8 +5,11 @@ function TaskInput({addTodo}) {
   	return (
 	    <form onSubmit={(e) => {
 	    	e.preventDefault();
-	    	console.log(input.value);
-	    	addTodo(input.value);
+	    	const inputObj = {
+	    		name: input.value,
+	    		isChecked: false
+	    	}
+	    	addTodo(inputObj);
 	    	input.value = '';
 	    }}>
 	      <input 
