@@ -1,4 +1,5 @@
 import React from 'react';
+import "../index.css";
 
 import Checkbox from './Checkbox';
 import CloseButton from './CloseButton';
@@ -10,15 +11,15 @@ const strike = {
 function Task({todo, index, handleChange, handleClick}) {
 	return (
 	    <>
-	    	<div>
+	    	<li className="todo-list-item">
 	    		<Checkbox 
 	    			todo={todo} 
 	    			handleChange={handleChange} 
 	    			index={index}  
 	    		/>
-	    		<span style={todo.isChecked? strike : {}}>{todo.name}</span>
+	    		<div className="list-item-text" style={todo.isChecked? strike : {}}>{todo.name}</div>
 	    		<CloseButton index={index} handleClick={handleClick} />
-	    	</div>
+	    	</li>
 	    </>
 	);
 };

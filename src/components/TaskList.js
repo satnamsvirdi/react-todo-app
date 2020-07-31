@@ -1,10 +1,11 @@
 import React from 'react';
+import "../index.css";
 
 import Task from './Task';
 
 function TaskList({data, handleChange, handleClick}) {
   return (
-    <div>
+    <ul className="todo-list">
       {data.map((todo, index) => {
       	return (
       		<Task todo={todo} 
@@ -15,7 +16,7 @@ function TaskList({data, handleChange, handleClick}) {
 	    	/>
 	    )
       })}
-    </div>    
+    </ul>    
   );
 };
 

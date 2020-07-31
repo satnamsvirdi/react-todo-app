@@ -8,7 +8,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [{
+        name: "read 10 pages of Effective UI",
+        isChecked: false
+      },
+      {
+        name: "do a barrel role",
+        isChecked: false
+      },
+      {
+        name: "drink lassi",
+        isChecked: true
+      }
+      ]
     }
   }; 
 

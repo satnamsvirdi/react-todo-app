@@ -24,3 +24,5 @@ yarn-error.log*
 
 default.md
 
+build/
+
