@@ -8,43 +8,62 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [{
-        name: "read 10 pages of Effective UI",
-        isChecked: false
-      },
-      {
-        name: "do a barrel role",
-        isChecked: false
-      },
-      {
-        name: "drink lassi",
-        isChecked: true
-      }
-      ]
+      data: []
     }
   }; 
 
-  addTodo = (obj) => {
-    this.setState({
-      data: [...this.state.data, obj]
-    });
+  setLocalStorage = () => {
+    console.log("locals here");
+    //console.log(this.state.data);
+    //localStorage.setItem("todos", JSON.stringify(this.state.data));
   }
 
-  handleChange = (index) => { 
+  addTodo = (obj) => {
+    const newTodo = [...this.state.data, obj]
+
+    this.setState({
+      data: newTodo
+    });
+
+    localStorage.setItem("todos", JSON.stringify(newTodo));
+  }
+
+
+  isComplete = (index) => { 
     let newTodos = [...this.state.data];
     newTodos[index].isChecked = !newTodos[index].isChecked ? true : false;
     this.setState({
       data: newTodos
-    })
+    });
+
   };
 
-  handleClick = (index) => {
-    let newTodos = [...this.state.data];
-    newTodos.splice(index,1);
+  removeTodo = (index) => {
+    let newTodo = [...this.state.data];
+    newTodo.splice(index,1);
     this.setState({
-      data: newTodos
-    })
+      data: newTodo
+    });
+
+    localStorage.setItem("todos", JSON.stringify(newTodo));
+  
   };
+
+  hydrateTodoList = () => {
+    if(localStorage.hasOwnProperty('todos')) {
+      const localData = JSON.parse(localStorage.getItem("todos"))
+      this.setState({
+        data: localData
+      })
+    } else {
+      return {}
+    }
+    
+  }
+
+  componentDidMount() {
+    this.hydrateTodoList();
+  }
 
   render() {
     return (
@@ -53,8 +72,8 @@ class App extends React.Component {
         <TaskInput addTodo={this.addTodo} />
         <TaskList 
           data={this.state.data}
-          handleChange={this.handleChange}
-          handleClick={this.handleClick}
+          handleChange={this.isComplete}
+          handleClick={this.removeTodo}
         />
       </>
     );
