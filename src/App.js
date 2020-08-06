@@ -12,13 +12,11 @@ class App extends React.Component {
     }
   }; 
 
-  setLocalStorage = () => {
-    console.log("locals here");
-    //console.log(this.state.data);
-    //localStorage.setItem("todos", JSON.stringify(this.state.data));
-  }
-
   addTodo = (obj) => {
+    if (!obj.name) {
+      return alert("Empty Task Not Allowed.")
+    }
+
     const newTodo = [...this.state.data, obj]
 
     this.setState({
