@@ -54,7 +54,7 @@ class App extends React.Component {
         data: localData
       })
     } else {
-      return {}
+      return null;
     }
     
   }
